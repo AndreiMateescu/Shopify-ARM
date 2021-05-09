@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import About from "./pages/About";
 import Page404 from "./pages/Page404";
 import { Route, Switch } from "react-router";
+import Category from "./pages/Category";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route exact path="/" component={Home} />
         <Route path="/login" component={Login} />
         <Route path="/about" component={About} />
+        <Route path="/category/:categoryName" component={Category} />
 
         <Route path="*" component={Page404} />
       </Switch>
