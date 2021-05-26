@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import logo from "../assets/images/logo.png";
 import { ReactComponent as ShoppingCart } from "../assets/icons/shopping-cart.svg";
 import "./Header.css";
+import { connect } from "react-redux";
 
 function Header(props) {
-  const { user, signOut } = props;
+  const { user, signOut, numberOfProducts } = props;
   return (
     <div className="header d-flex justify-content-between align-items-center container">
       <Link to="/">
@@ -20,10 +21,19 @@ function Header(props) {
         ) : (
           <Link to="/login">Login</Link>
         )}
-        <ShoppingCart />
+        <Link to="/cart">
+          <ShoppingCart className="ml-2" />
+        </Link>
+        <p className="ml-2">{numberOfProducts}</p>
       </div>
     </div>
   );
 }
 
-export default Header;
+function mapStateToProps(state) {
+  return {
+    numberOfProducts: state.products.length,
+  };
+}
+
+export default connect(mapStateToProps)(Header);

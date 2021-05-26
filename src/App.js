@@ -6,6 +6,7 @@ import About from "./pages/About";
 import Page404 from "./pages/Page404";
 import { Route, Switch } from "react-router";
 import Category from "./pages/Category";
+import Cart from "./pages/Cart";
 
 //Firebase imports
 import withFirebaseAuth from "react-with-firebase-auth";
@@ -26,14 +27,6 @@ function App(props) {
   const { user, signOut, signInWithGoogle } = props;
   return (
     <div className="App">
-      {/* <header className="App-header">
-        {user ? <p>Hello, {user.displayName}</p> : <p>Please sign in.</p>}
-        {user ? (
-          <button onClick={signOut}>Sign out</button>
-        ) : (
-          <button onClick={signInWithGoogle}>Sign in with Google</button>
-        )}
-      </header> */}
       <Switch>
         <Route
           exact
@@ -48,7 +41,7 @@ function App(props) {
         />
         <Route path="/about" component={About} />
         <Route path="/category/:categoryName" component={Category} />
-
+        <Route path="/cart" component={Cart} />
         <Route path="*" component={Page404} />
       </Switch>
     </div>
