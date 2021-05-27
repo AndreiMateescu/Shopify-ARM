@@ -7,26 +7,35 @@ import { connect } from "react-redux";
 
 function Header(props) {
   const { user, signOut, numberOfProducts } = props;
+
   return (
-    <div className="header d-flex justify-content-between align-items-center container">
-      <Link to="/">
-        <img src={logo} alt="logo" />
-      </Link>
-      <div>
-        {user ? (
-          <div>
-            <p>{user.displayName}</p>
-            <button onClick={signOut}>Sign Out</button>
-          </div>
-        ) : (
-          <Link to="/login">Login</Link>
-        )}
-        <Link to="/cart">
-          <ShoppingCart className="ml-2" />
+    <header className="border-bottom mb-3">
+      <div className="header d-flex justify-content-between align-items-center container">
+        <Link to="/" className="my-3">
+          <img src={logo} alt="logo" className="logo" />
         </Link>
-        <p className="ml-2">{numberOfProducts}</p>
+        <div>
+          {user && user.uid ? <p>Salut, {user.displayName}!</p> : null}
+          <div className="d-flex justify-content-end">
+            {user && user.uid ? (
+              <p className="logout h5" onClick={() => signOut()}>
+                Delogare
+              </p>
+            ) : (
+              <Link to="/login" className="h5 mb-0">
+                Logare
+              </Link>
+            )}
+            <div className="d-flex align-items-center">
+              <Link to="/cart" className="d-flex">
+                <ShoppingCart className="ml-2" />
+                <p className="ml-1 mb-0">{numberOfProducts}</p>
+              </Link>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
+    </header>
   );
 }
 

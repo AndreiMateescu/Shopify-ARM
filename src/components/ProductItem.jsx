@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import { addToCart } from "../redux/actions/cart";
 
 function ProductItem(props) {
-  const { name, price, currency, image, addToCartWithDispatch } = props;
+  const { name, price, currency, image, addToCart, id } = props;
+
   return (
-    <div className="product-item col-4 d-flex flex-column align-items-center">
+    <div className="product-item col-4 d-flex flex-column align-items-center mb-3">
       <img src={image} alt="productPhoto" className="mb-2" />
       <p className="mb-1 text-center">{name}</p>
       <p className="text-center">
@@ -14,14 +15,17 @@ function ProductItem(props) {
       </p>
       <button
         className="btn btn-outline-dark"
-        onClick={() =>
-          addToCartWithDispatch({
-            name,
-            price,
-            currency,
-            image,
-          })
-        }
+        onClick={() => {
+          return addToCart({
+            product: {
+              id,
+              name,
+              price,
+              currency,
+              image,
+            },
+          });
+        }}
       >
         Adauga in cos
       </button>
@@ -31,7 +35,7 @@ function ProductItem(props) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addToCartWithDispatch: (product) => {
+    addToCart: (product) => {
       dispatch(addToCart(product));
     },
   };

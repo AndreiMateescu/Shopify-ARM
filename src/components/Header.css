@@ -2,3 +2,13 @@
   margin-bottom: 15px;
   margin-top: 15px;
 }
+
+header .logo {
+  width: 150px;
+  height: auto;
+}
+
+header .logout:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
