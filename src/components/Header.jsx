@@ -4,9 +4,10 @@ import logo from "../assets/images/logo.png";
 import { ReactComponent as ShoppingCart } from "../assets/icons/shopping-cart.svg";
 import "./Header.css";
 import { connect } from "react-redux";
+import { signOutAction } from "../redux/actions/user";
 
 function Header(props) {
-  const { user, signOut, numberOfProducts } = props;
+  const { numberOfProducts, user, signOutWithDispatch } = props;
 
   return (
     <header className="border-bottom mb-3">
@@ -18,7 +19,7 @@ function Header(props) {
           {user && user.uid ? <p>Salut, {user.displayName}!</p> : null}
           <div className="d-flex justify-content-end">
             {user && user.uid ? (
-              <p className="logout h5" onClick={() => signOut()}>
+              <p className="logout h5" onClick={() => signOutWithDispatch()}>
                 Delogare
               </p>
             ) : (
@@ -41,8 +42,15 @@ function Header(props) {
 
 function mapStateToProps(state) {
   return {
-    numberOfProducts: state.products.length,
+    numberOfProducts: state.cart.products.length,
+    user: state.user.data,
   };
 }
 
-export default connect(mapStateToProps)(Header);
+function mapDispatchToProps(dispatch) {
+  return {
+    signOutWithDispatch: () => dispatch(signOutAction()),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

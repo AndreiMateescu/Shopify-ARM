@@ -8,37 +8,14 @@ import { Route, Switch } from "react-router";
 import Category from "./pages/Category";
 import Cart from "./pages/Cart";
 
-//Firebase imports
-import withFirebaseAuth from "react-with-firebase-auth";
-import * as firebase from "firebase/app";
 import "firebase/auth";
-import config from "./configs/firebase";
 
-const firebaseApp = firebase.initializeApp(config);
-
-const firebaseAppAuth = firebaseApp.auth();
-
-const providers = {
-  googleProvider: new firebase.auth.GoogleAuthProvider(),
-};
-
-function App(props) {
-  console.log(props);
-  const { user, signOut, signInWithGoogle } = props;
+function App() {
   return (
     <div className="App">
       <Switch>
-        <Route
-          exact
-          path="/"
-          render={(props) => <Home {...props} signOut={signOut} user={user} />}
-        />
-        <Route
-          path="/login"
-          render={(props) => (
-            <Login {...props} signInWithGoogle={signInWithGoogle} />
-          )}
-        />
+        <Route exact path="/" component={Home} />
+        <Route path="/login" component={Login} />
         <Route path="/about" component={About} />
         <Route path="/category/:categoryName" component={Category} />
         <Route path="/cart" component={Cart} />
@@ -48,7 +25,4 @@ function App(props) {
   );
 }
 
-export default withFirebaseAuth({
-  providers,
-  firebaseAppAuth,
-})(App);
+export default App;

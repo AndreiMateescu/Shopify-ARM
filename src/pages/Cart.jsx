@@ -63,7 +63,7 @@ function Cart(props) {
 
 function mapStateToProps(state) {
   return {
-    cartItems: state.products,
+    cartItems: state.cart.products,
   };
 }
 
